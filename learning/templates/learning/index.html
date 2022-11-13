@@ -1,4 +1,9 @@
 {% extends 'learning/layout.html' %}
 {% block body %}
-<h1>Hello </h1>
+<h1>Hello</h1>
+<div class="row">
+    <div class="column">Hi{{avg_point}}</div>
+    <div class="column">Try hard on {{weak_sub}}</div>
+    <div class="column"><!-- Include the next test here --></div>
+</div>
 {% endblock %}

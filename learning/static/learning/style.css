@@ -11,3 +11,21 @@ a {
     text-decoration: none;
     color: black;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+    border:none;
+    border-right: 2px solid;
+    }
+    /* The floats after the columns are cleared */
+.row:after {
+    content: “”;
+    border:none;
+    display: table;
+    clear: both;
+    border:none;
+}
+.row {
+    border:none;
+}

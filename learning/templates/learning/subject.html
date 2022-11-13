@@ -9,7 +9,7 @@
 <div>
     <h5>{{score.point}}</h5>
     <p>x{{score.kind}}</p><br>
-    <form action="{% url 'subject' score.id %}" method="POST">
+    <form action="{% url 'subject' subject.id %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="score" value="{{score.id}}">
     <input type="submit" class="btn btn-danger" value="Delete">
@@ -17,10 +17,10 @@
 </div>
 {% endfor %}
 {% else %}
-Nothing yet...
+Nothing yet...<br>
 {% endif %}
 <button class="btn btn-primary">Submit a score</button><Br><br>
-    <form action="{% url 'scores' %}" method="POST" style="display:none;">
+    <form action="{% url 'subject' subject.id  %}" method="POST" style="display:none;">
         {% csrf_token %}
         <label for="kind">Kind</label>
         <select id="kind" name="kind">
@@ -29,7 +29,7 @@ Nothing yet...
             <option value="3">final test</option>
         </select><br><br>
     
-        Score: <input type="number" name="score"><br><br>
+        Score: <input type="number" name="point"><br><br>
         <input type="submit" class="btn btn-outline-primary">
     </form>
 <script>

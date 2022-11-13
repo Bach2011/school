@@ -22,9 +22,9 @@ def scores(request):
         })
 def subjects(request):
     if request.method == "POST":
-        name = request.POST.get('name')
+        name = str(request.POST.get('name')).capitalize()
         Subject.objects.create(name=name)
-        return HttpResponseRedirect(reverse('subject', args=Subject.objects.last().id))
+        return HttpResponseRedirect(reverse('subject', args=[Subject.objects.last().id]))
     else:
         return render(request, "learning/subjects.html", {
         "subjects": Subject.objects.all()
@@ -58,9 +58,15 @@ def subject(request, id):
             sub.avg_point = avg_point(sub)
             sub.save()
         else:
-            score = request.POST.get('score')
-
-        return HttpResponseRedirect(reverse('subject', args=id))
+            score = request.POST.get('point')
+            kind = request.POST.get('kind')
+            Score.objects.create(subject=sub, point=score, kind=kind)
+            try:
+                sub.avg_point = avg_point(sub)
+                sub.save()
+            except:
+                pass
+        return HttpResponseRedirect(reverse('subject', args=[id]))
     else:
         return render(request, "learning/subject.html", {
             "subject":sub,
