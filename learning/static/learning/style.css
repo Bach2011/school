@@ -1,0 +1,13 @@
+* {
+    text-align: center;
+}
+div {
+    border-style: groove;
+    padding: 15px;
+    margin-bottom:  15px;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+}

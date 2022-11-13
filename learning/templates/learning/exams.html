@@ -1,0 +1,59 @@
+{% extends 'learning/layout.html' %}
+{% block title %}Exams{% endblock %}
+{% block body %}
+{% if exams %}
+{% for exam in exams %}
+<div class="exam">
+{{exam.subject}}
+<p>{{exam.date}}<br>
+x{{exam.kind}}
+</p>
+<form action="{% url 'exams' %}" method="POST">
+    {% csrf_token %}
+<button class="btn btn-danger" name="del" value="{{exam.id}}">Delete</button>
+</form>
+</div>
+{% endfor %}
+{% else %}
+<h2>Great! No exams</h2>
+{% endif %}
+<br>
+<button class="btn btn-primary new">Create a new exam reminder</button><br><br>
+<form action="{% url 'exams' %}" method="POST" style="display:none;" class="new">
+    {% csrf_token %}
+    <label for="subject">Subject</label>
+    <select name="subject" id="subject">
+        {% for subject in subjects %}
+        <option value="{{subject}}">{{subject}}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="date">Date</label>
+    <input type="date" name="date" id="date"><br><br>
+
+    <label for="kind">Kind</label>
+    <select name="kind" id="kind">
+        <option value="1">15 minutes test</option>
+        <option value="2">Midterm</option>
+        <option value="3">Final</option>
+    </select><br><br>
+
+    Place (optional) <input type="text" name="place" placeholder="place">
+    <br><br>
+
+    <input type="submit" class="btn btn-primary">
+</form>
+<script>
+    let time = 0
+    document.querySelector('button.new').addEventListener('click', () => {
+        if(time == 0){
+            document.querySelector('form.new').style.display = 'block'
+            time++
+        }else {
+            document.querySelector('form.new').style.display = 'none'
+            time--
+        }
+        
+    })
+</script>
+{% endblock %}

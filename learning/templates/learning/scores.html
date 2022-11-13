@@ -1,0 +1,19 @@
+{% extends 'learning/layout.html' %}
+{% block title %}Scores{% endblock %}
+{% block body %}
+{% if avg %}
+<h3>Average: {{avg}} ({{a}})</h3>
+{% for subject in subjects %}
+<a href="{% url 'subject' subject.id%}">
+<div>
+    {{subject.name}}<br>
+    <p>{{subject.avg_point}}</p>
+</div>
+</a>
+{% endfor %}
+{% else %}
+<h2>Nothing yet..</h2>
+{% endif %}
+<br>
+
+{% endblock %}

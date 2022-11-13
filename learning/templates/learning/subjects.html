@@ -1,0 +1,32 @@
+{% extends 'learning/layout.html' %}
+{% block title %}Subjects{% endblock %}
+{% block body %}
+{% if subjects %}
+{% for subject in subjects %}
+<a href="{% url 'subject' subject.id %}"><div>{{subject.name}}</div></a>
+<Br>
+{% endfor %}
+{% else %}
+<h2>You have created no subject!</h2>
+{% endif %}
+<br>
+<button class="btn btn-primary">Create a new subject</button>
+<br><br>
+<form action="{% url 'subjects' %}" method="POST" style="display:none;">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name">
+    <br><br><input type="submit" class="btn btn-primary">
+</form>
+<script>
+    times = 0
+    document.querySelector('button').onclick = () => {
+        if (times == 0){
+            document.querySelector('form').style.display = 'block'
+            times++
+        }else {
+        document.querySelector('form').style.display = 'none'
+        times--
+        }
+    }
+</script>
+{% endblock %}
